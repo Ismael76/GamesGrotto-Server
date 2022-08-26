@@ -15,6 +15,7 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 # generates token for user so they can access restricted routes. TODO: Will also need similar system in main.py
 
+
 def token_required(func):
     """
     Decorator for verifying access token.
@@ -26,19 +27,22 @@ def token_required(func):
 
         if "Authorization" in request.headers:
             auth = request.headers["Authorization"]
-            token = str.replace(str(auth), "Bearer ", "") # remove 'Bearer' in token
+            # remove 'Bearer' in token
+            token = str.replace(str(auth), "Bearer ", "")
 
         if not token:
-            return jsonify({"message": "Token is missing."}), 401 # unauthorized
+            # unauthorized
+            return jsonify({"message": "Token is missing."}), 401
         try:
-            user_data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"]) # get decoded user data
-            current_user = User.query.filter_by(username=user_data["username"]).first()
+            user_data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=[
+                                   "HS256"])  # get decoded user data
+            current_user = User.query.filter_by(
+                username=user_data["username"]).first()
         except:
-            return jsonify({"message": "Invalid token."}), 401 # unauthorized
+            return jsonify({"message": "Invalid token."}), 401  # unauthorized
         return func(current_user)
 
     return decorated
-
 
 
 @auth_routes.route('/login', methods=["POST"])
@@ -47,7 +51,7 @@ def login():
     Receives a username and password in the request body and generates a token
     that can be used to verify a user"s identity.
     """
-
+    print("RUNNING 1")
     body = request.get_json()
     username = body["username"]
     password = body["password"]
@@ -55,10 +59,10 @@ def login():
     user = User.query.filter_by(username=username).first()
 
     if not user:
-        return make_response("No such user.", 401) # unauthorized
-
+        return make_response("No such user.", 401)  # unauthorized
+    print("RUNNING 2")
     if check_password_hash(user.password, password):
-
+        print("RUNNING 3")
         # generate token with encoded user data
 
         token = jwt.encode({
@@ -66,18 +70,20 @@ def login():
             "exp": datetime.utcnow() + timedelta(minutes=30)
         }, app.config["SECRET_KEY"], algorithm="HS256")
 
-        return make_response(jsonify({"token": token}), 201) # resource created
+        # resource created
+        return make_response(jsonify({"token": token}), 201)
+    print("RUNNING 3")
+    return make_response("Incorrect password.", 403)  # forbidden
 
-    return make_response("Incorrect password.", 403) # forbidden
 
 @auth_routes.route("/register", methods=["POST"])
 def register():
 
     # Should receive a username and password in the request body and generate a token that can be used to verify a user's identity.
 
-
     body = request.get_json()
     username = body["username"]
+    email = body["email"]
     password = body["password"]
 
     # checks for existing user with the same username
@@ -86,14 +92,15 @@ def register():
     # stores user securely in the database
     if not user:
         password = generate_password_hash(password)
-        user = User(username = username, password=password)
+        user = User(username=username, email=email, password=password)
 
         db.session.add(user)
         db.session.commit()
 
-        return make_response("Successfully registered.", 201) # resource created
+        # resource created
+        return make_response("Successfully registered.", 201)
     else:
-        return make_response("User already exists.", 409) # conflict
+        return make_response("User already exists.", 409)  # conflict
 
 
 @auth_routes.route("/user", methods=["GET", "PATCH"])
@@ -103,7 +110,7 @@ def update_and_get_user(current_user):
 
     # Used to edit a users security info
     if not user:
-        return make_response("User not found.", 202) # accepted
+        return make_response("User not found.", 202)  # accepted
 
     if request.method == "PATCH":
         body = request.get_json()
@@ -119,5 +126,6 @@ def update_and_get_user(current_user):
         "email": user.email
     }), 200)
 
+
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)
