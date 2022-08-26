@@ -30,13 +30,11 @@ def token_required(func):
 
         if not token:
             return jsonify({"message": "Token is missing."}), 401 # unauthorized
-
         try:
             user_data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"]) # get decoded user data
             current_user = User.query.filter_by(username=user_data["username"]).first()
         except:
             return jsonify({"message": "Invalid token."}), 401 # unauthorized
-
         return func(current_user)
 
     return decorated
@@ -117,7 +115,7 @@ def update_and_get_user(current_user):
 
     return make_response(jsonify({
         "username": user.username,
-        "full_name": user.full_name,
+        # "full_name": user.full_name,
         "email": user.email
     }), 200)
 

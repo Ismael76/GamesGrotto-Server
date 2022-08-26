@@ -24,6 +24,12 @@ app.config.update(
 )
 
 CORS(app)
+cors = CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
+
 db.app = app
 db.init_app(app)
 
