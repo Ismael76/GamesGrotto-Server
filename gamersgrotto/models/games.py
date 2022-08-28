@@ -6,6 +6,7 @@ class Game(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(100), nullable=True)
+    price = db.Column(db.Float, nullable=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     image = db.Column(db.String(500), nullable=True)
@@ -13,8 +14,9 @@ class Game(db.Model):
     location = db.Column(db.String(100), nullable=False)
     marketstatus = db.Column(db.String(100), nullable=True)
     tradestatus = db.Column(db.String(100), nullable=True)
-    date = db.Column(db.String(100), nullable=False)
+    # date = db.Column(db.String(100), nullable=False)
 
 
     # additional tags for type of game and whether it is for sale or trade etc.
     # tag = db.Column(db.String(100), nullable=True)
+

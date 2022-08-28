@@ -4,16 +4,27 @@ from functools import wraps
 from ..database.db import db
 from ..models.users import User
 from ..models.games import Game
-import jwt
-import os
+from flask_marshmallow import Marshmallow
+import json
+
+app = Flask(__name__)
+ma = Marshmallow(app)
 
 games_routes = Blueprint('games', __name__)
+
+class GamesSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ("type", "title", "description", "username", "location")
+games_schema = GamesSchema()
+games_schema = GamesSchema(many=True)
 
 @games_routes.route('/games', methods=["GET", "POST"])
 def games():
     if request.method == "POST":
         body = request.get_json()
         type = body["type"]
+        # price = body["price"]
         title = body["title"]
         description = body["description"]
         # image = body["image"]
@@ -27,8 +38,9 @@ def games():
 
         db.session.add(game)
         db.session.commit()
+        return body
     else:
         all_games = Game.query.all()
-        return all_games
+        return(json.dumps(games_schema.dump(all_games)))
 
 

@@ -37,7 +37,7 @@ db.init_app(app)
 
 app.register_blueprint(main_routes)
 app.register_blueprint(auth_routes, url_prefix="/auth")
-app.register_blueprint(games_routes, url_prefix="/games")
+app.register_blueprint(games_routes)
 # add another route for auth
 
 ## Main
