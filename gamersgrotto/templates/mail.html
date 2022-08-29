@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your LegOh! Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body
+    style="background-color: #7bce58; display: flex; flex-direction:column; justify-content: center; align-items:center; margin: auto;">
+    <main width="50%" style="margin:auto; text-align: center; margin: 5rem 0; 
+
+    border-style: solid;
+    border-image-source: url('https://i.ibb.co/3Y08gKY/border-image-golden2.png'); 
+    border-image-slice: 8 8 8 8;
+    border-image-width: 18px; 
+    border-width: 15px; 
+    padding: 12px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: url('https://i.ibb.co/dWKdz4Y/background-image-golden2.png') repeat repeat;
+    background-clip: padding-box;
+    background-origin: padding-box;
+    background-position: center;">
+        <nav width="100%">
+            <h2>
+                <a href="http://localhost:5000/" width="100%"
+                    style="padding: 10px; color: #864603; text-decoration: none; border: 1px solid #214611; border-radius: 5px; box-shadow: 2px 2px 5px 	#214611; font-family: 'Press Start 2P', cursive; font-weight: bolder;">
+                    GAMES GROTTO
+                </a>
+            </h2>
+        </nav>
+        <h1 style="padding: 1rem; font-size: 1.5rem; color: #542c02; font-family: 'Press Start 2P', cursive;">Hello,
+            {{username}}</h1>
+        <p style="font-size: 1rem; color: #542c02; font-family: 'Press Start 2P', cursive;">
+            You have a message!
+        </p>
+        <p style="font-size: 1rem; color: #542c02; font-family: 'Press Start 2P', cursive;"> For Item: {{listing_title}}
+        </p>
+        <div style=" margin-top: 3rem; border: 1px solid black">
+            <h3 style="color: #214611; font-family: 'Press Start 2P', cursive; font-size: 0.8rem;">Name: {{name}}</h3>
+            <h3 style="color: #214611; font-family: 'Press Start 2P', cursive; font-size: 0.8rem;">Tel:
+                {{mobile_number}}</h3>
+            <p style="color: #214611; font-family: 'Press Start 2P', cursive; font-size: 0.8rem;">Msg: {{message}}</p>
+        </div>
+        <img width="100%" style="margin: 10px auto;"
+            src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2F49.media.tumblr.com%2F0f5eefb51abeeb07aa525a83e733b408%2Ftumblr_nh7vzpNNJX1t63sglo1_500.gif"
+            alt="LegOh">
+        <footer>
+            <h4>
+                <a href="http://localhost:5000/" width="100%"
+                    style="padding: 10px; color: #864603; text-decoration: none; border: 1px solid #214611; border-radius: 5px; box-shadow: 2px 2px 5px 	#214611; font-family: 'Press Start 2P', cursive; font-weight: bolder;">
+                    games-grotto.netlify.app
+                </a>
+            </h4>
+        </footer>
+    </main>
+</body>
+
+</html>

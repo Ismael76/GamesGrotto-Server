@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "96a6a3b9fed0a5f9dd3e83f68fd9ed2ba200aace48ef5bfd8aca0f4bfdedcf38"
+            "sha256": "70cbcd30d36c6393c71ca1c96e2488931ed5d831e4addb2248d827b309c556c9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -48,6 +48,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.2"
+        },
+        "blinker": {
+            "hashes": [
+                "sha256:1eb563df6fdbc39eeddc177d953203f99f097e9bf0e2b8f9f3cf18b6ca425e36",
+                "sha256:923e5e2f69c155f2cc42dafbbd70e16e3fde24d2d4aa2ab72fbe386238892462"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+            "version": "==1.5"
         },
         "cffi": {
             "hashes": [
@@ -187,6 +195,13 @@
             "index": "pypi",
             "version": "==3.0.10"
         },
+        "flask-mail": {
+            "hashes": [
+                "sha256:db9669d1eac783e73f06406f36bb5f71eae99b6c24e5849d76934641e3f6263e"
+            ],
+            "index": "pypi",
+            "version": "==0.9.0"
+        },
         "flask-marshmallow": {
             "hashes": [
                 "sha256:2adcd782b5a4a6c5ae3c96701f320d8ca6997995a52b2661093c56cc3ed24754",
@@ -268,7 +283,7 @@
                 "sha256:f8bfd36f368efe0ab2a6aa3db7f14598aac454b06849fb633b762ddbede1db90",
                 "sha256:ffe73f9e7aea404722058405ff24041e59d31ca23d1da0895af48050a07b6932"
             ],
-            "markers": "python_version >= '3' and (platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'win32' or platform_machine == 'WIN32'))))))",
+            "markers": "python_version >= '3.0' and platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'win32' or platform_machine == 'WIN32')))))",
             "version": "==1.1.3"
         },
         "gunicorn": {

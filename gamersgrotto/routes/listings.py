@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, Flask, make_response
+from flask import Blueprint, request, jsonify, Flask, make_response, render_template
 from datetime import datetime, timedelta
 from functools import wraps
 from ..database.db import db
@@ -8,6 +8,9 @@ from flask_marshmallow import Marshmallow
 import json
 from flask_cors import CORS
 import datetime
+from ..mailers import mail_config
+from flask_mail import Mail, Message
+
 
 app = Flask(__name__)
 ma = Marshmallow(app)
@@ -18,6 +21,8 @@ cors = CORS(app, resource={
         "origins": "*"
     }
 })
+
+mail = mail_config(app)
 
 listings_routes = Blueprint('listings', __name__)
 
@@ -63,10 +68,15 @@ def contact():
     if request.method == "POST":
         body = request.get_json()
         seller_username = body["seller_username"]
+        listing_title = body["listing_title"]
         name = body["name"]
         mobile_number = body["mobile_number"]
         message = body["message"]
 
         user = User.query.filter_by(username="testuser").first()
-        print(user.email)
+        msg = Message("TEST EMAIL!",
+                      sender='GamesGrotto', recipients=["ismaeltest@outlook.com"])
+        msg.html = render_template(
+            'mail.html', username=seller_username, listing_title=listing_title, name=name, mobile_number=mobile_number, message=message)
+        mail.send(msg)
         return user.email
