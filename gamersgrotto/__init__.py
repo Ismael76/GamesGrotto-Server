@@ -8,8 +8,13 @@ from .routes.main import main_routes
 
 # route for auth
 from .routes.auth import auth_routes
+
+# route for listings
 from .routes.listings import listings_routes
 
+# routes for forum posts and comments
+from .routes.posts import posts_routes
+from .routes.comments import comments_routes
 # Load environment variables
 
 load_dotenv()
