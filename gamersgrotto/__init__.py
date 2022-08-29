@@ -43,7 +43,7 @@ app.register_blueprint(main_routes)
 app.register_blueprint(auth_routes, url_prefix="/auth")
 app.register_blueprint(listings_routes, url_prefix="/listings")
 app.register_blueprint(posts_routes)
-app.register_blueprint(comments_routes)
+app.register_blueprint(comments_routes, url_prefix="/comments")
 # add another route for auth
 
 ## Main

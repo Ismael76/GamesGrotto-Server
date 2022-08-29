@@ -18,7 +18,7 @@ class CommentsSchema(ma.Schema):
 comments_schema = CommentsSchema()
 comments_schema = CommentsSchema(many=True)
 
-@comments_routes.route('/comments', methods=["GET", "POST", "PATCH"])
+@comments_routes.route('/', methods=["GET", "POST", "PATCH"])
 def comments():
     if request.method == "POST":
         body = request.get_json()
@@ -42,3 +42,7 @@ def comments():
         all_comments = Comment.query.all()
         return(json.dumps(comments_schema.dump(all_comments)))
 
+@comments_routes.route('/<int:post_id>', methods=["GET"])
+def comments_post(post_id):
+    all_comments = Comment.query.filter_by(post_id=post_id).all()
+    return(json.dumps(comments_schema.dump(all_comments)))
