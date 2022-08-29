@@ -2,7 +2,7 @@ from ..database.db import db
 
 # create db model for a game template
 
-class Game(db.Model):
+class Listing(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(100), nullable=True)
@@ -13,10 +13,9 @@ class Game(db.Model):
     username = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(100), nullable=False)
     marketstatus = db.Column(db.String(100), nullable=True)
-    tradestatus = db.Column(db.String(100), nullable=True)
-    # date = db.Column(db.String(100), nullable=False)
+    # tradestatus = db.Column(db.String(100), nullable=True)
+    date = db.Column(db.Date, nullable=False)
 
 
     # additional tags for type of game and whether it is for sale or trade etc.
     # tag = db.Column(db.String(100), nullable=True)
-
