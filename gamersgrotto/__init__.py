@@ -8,9 +8,9 @@ from .routes.main import main_routes
 
 # route for auth
 from .routes.auth import auth_routes
-
 from .routes.listings import listings_routes
-
+from .routes.posts import posts_routes
+from .routes.comments import comments_routes
 # Load environment variables
 
 load_dotenv()
@@ -38,6 +38,8 @@ db.init_app(app)
 app.register_blueprint(main_routes)
 app.register_blueprint(auth_routes, url_prefix="/auth")
 app.register_blueprint(listings_routes, url_prefix="/listings")
+app.register_blueprint(posts_routes)
+app.register_blueprint(comments_routes)
 # add another route for auth
 
 ## Main
