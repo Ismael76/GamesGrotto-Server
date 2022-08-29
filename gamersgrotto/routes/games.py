@@ -15,7 +15,7 @@ games_routes = Blueprint('games', __name__)
 class GamesSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ("type", "title", "description", "username", "location")
+        fields = ("id", "type", "title", "description", "username", "location")
 games_schema = GamesSchema()
 games_schema = GamesSchema(many=True)
 
