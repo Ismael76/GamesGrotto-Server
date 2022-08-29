@@ -56,3 +56,17 @@ def listings():
     else:
         all_games = Listing.query.all()
         return (json.dumps(games_schema.dump(all_games)))
+
+
+@listings_routes.route('/contact', methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        body = request.get_json()
+        seller_username = body["seller_username"]
+        name = body["name"]
+        mobile_number = body["mobile_number"]
+        message = body["message"]
+
+        user = User.query.filter_by(username="testuser").first()
+        print(user.email)
+        return user.email
