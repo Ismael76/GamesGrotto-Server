@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template
 from ..database.db import db
-from ..models.games import Game
+from ..models.listings import Listing
 
 main_routes = Blueprint("main", __name__)
 

@@ -3,44 +3,42 @@ from datetime import datetime, timedelta
 from functools import wraps
 from ..database.db import db
 from ..models.users import User
-from ..models.games import Game
+from ..models.listings import Listing
 from flask_marshmallow import Marshmallow
 import json
+import datetime
 
 app = Flask(__name__)
 ma = Marshmallow(app)
 
-games_routes = Blueprint('games', __name__)
+listings_routes = Blueprint('listings', __name__)
 
 class GamesSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ("type", "title", "description", "username", "location")
+        fields = ("type", "price", "title", "description", "image", "username", "location", "marketstatus", "date")
 games_schema = GamesSchema()
 games_schema = GamesSchema(many=True)
 
-@games_routes.route('/games', methods=["GET", "POST"])
-def games():
+@listings_routes.route('/', methods=["GET", "POST"])
+def listings():
     if request.method == "POST":
         body = request.get_json()
         type = body["type"]
-        # price = body["price"]
+        price = body["price"]
         title = body["title"]
         description = body["description"]
-        # image = body["image"]
+        image = body["image"]
         username = body["username"]
         location = body["location"]
-        # marketstatus = body["marketstatus"]
-        # tradestatus = body["tradestatus"]
-        # date = body["date"]
+        marketstatus = body["marketstatus"]
+        date = datetime.datetime.now()
 
-        game = Game(type=type, title=title, description=description, username=username, location=location)
+        game = Listing(type=type, price=price, title=title, description=description, image=image, username=username, location=location, marketstatus=marketstatus, date=date)
 
         db.session.add(game)
         db.session.commit()
         return body
     else:
-        all_games = Game.query.all()
+        all_games = Listing.query.all()
         return(json.dumps(games_schema.dump(all_games)))
-
-

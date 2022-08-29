@@ -1,5 +1,5 @@
 from gamersgrotto import db
-from gamersgrotto.models.games import Game
+from gamersgrotto.models.listings import Listing
 from gamersgrotto.models.users import User
 
 # Clear it all out
