@@ -37,7 +37,11 @@ def comments():
         id = body["id"]
         likes = body["likes"]
         dislikes = body["dislikes"]
-        # Needs to be finished
+        post_to_patch = Comment.query.filter_by(id=id).first()
+        post_to_patch.likes = likes
+        post_to_patch.dislikes = dislikes
+        db.session.commit()
+        return body
     else:
         all_comments = Comment.query.all()
         return(json.dumps(comments_schema.dump(all_comments)))
