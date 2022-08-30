@@ -25,11 +25,13 @@ def scores():
         username = body["username"]
         score = body["score"]
         score_to_patch = Score.query.order_by(Score.score).first()
+        result = 0
         if score >= score_to_patch.score:
             score_to_patch.username = username
             score_to_patch.score = score
+            result = 1
         db.session.commit()
-        return body
+        return str(result)
     elif request.method == "POST":
         body = request.get_json()
         username = body["username"]
