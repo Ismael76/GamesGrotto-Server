@@ -73,10 +73,11 @@ def contact():
         mobile_number = body["mobile_number"]
         message = body["message"]
 
-        user = User.query.filter_by(username="testuser").first()
-        msg = Message("TEST EMAIL!",
-                      sender='GamesGrotto', recipients=["ismaeltest@outlook.com"])
+        user = User.query.filter_by(username=seller_username).first()
+        seller_email = user.email
+        msg = Message("NEW MESSAGE! @ GamesGrotto",
+                      sender=["games.grotto.uk@gmail.com"], recipients=[seller_email])
         msg.html = render_template(
             'mail.html', username=seller_username, listing_title=listing_title, name=name, mobile_number=mobile_number, message=message)
         mail.send(msg)
-        return user.email
+        return {"sent": True}

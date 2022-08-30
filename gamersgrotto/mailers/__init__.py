@@ -13,18 +13,20 @@ def mail_config(app):
     """
 
     # Used my own mailtrap to recieve emails to see if it was working.
-    app.config['MAIL_SERVER'] = 'smtp.mailtrap.io'
-    app.config['MAIL_PORT'] = 2525
-    app.config['MAIL_USERNAME'] = '734309792e682e'
-    app.config['MAIL_PASSWORD'] = '98d1a31b431068'
-    app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USE_SSL'] = False
-
     # app.config['MAIL_SERVER'] = 'smtp.mailtrap.io'
     # app.config['MAIL_PORT'] = 2525
-    # app.config['MAIL_USERNAME'] = '4e5faaae935cfc'
-    # app.config['MAIL_PASSWORD'] = 'e621df0a5cc7d7'
+    # app.config['MAIL_USERNAME'] = 'd832590766d685'
+    # app.config['MAIL_PASSWORD'] = '5e3b44ef41e047'
     # app.config['MAIL_USE_TLS'] = True
     # app.config['MAIL_USE_SSL'] = False
+
+
+    # setup for real-world usage
+    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = 'games.grotto.uk@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'joqctptdnzmymoay'
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
 
     return Mail(app)
