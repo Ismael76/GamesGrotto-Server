@@ -13,6 +13,7 @@ from .routes.listings import listings_routes
 # routes for forum posts and comments
 from .routes.posts import posts_routes
 from .routes.comments import comments_routes
+from .routes.scores import scores_routes
 # Load environment variables
 
 load_dotenv()
@@ -44,6 +45,7 @@ app.register_blueprint(auth_routes, url_prefix="/auth")
 app.register_blueprint(listings_routes, url_prefix="/listings")
 app.register_blueprint(posts_routes)
 app.register_blueprint(comments_routes, url_prefix="/comments")
+app.register_blueprint(scores_routes, url_prefix="/scores")
 # add another route for auth
 
 # Main

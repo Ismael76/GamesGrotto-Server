@@ -27,21 +27,37 @@ def comments():
         username = body["username"]
         post_id = body["post_id"]
 
-        comment = Comment(text=text, username=username, post_id=post_id, likes=0, dislikes=0)
+        comment = Comment(text=text, username=username, post_id=post_id, likes=[], dislikes=[])
 
         db.session.add(comment)
         db.session.commit()
         return body
     elif request.method == "PATCH":
         body = request.get_json()
+        username = body["username"]
+        option = body["option"]
         id = body["id"]
         likes = body["likes"]
         dislikes = body["dislikes"]
         post_to_patch = Comment.query.filter_by(id=id).first()
+        if option == "likes":
+            if username in likes:
+                likes.remove(username)
+                number = -1
+            else:
+                likes.append(username)
+                number = 1
+        else:
+            if username in dislikes:
+                dislikes.remove(username)
+                number = -1
+            else:
+                dislikes.append(username)
+                number = 1
         post_to_patch.likes = likes
         post_to_patch.dislikes = dislikes
         db.session.commit()
-        return body
+        return str(number)
     else:
         all_comments = Comment.query.all()
         return(json.dumps(comments_schema.dump(all_comments)))
