@@ -63,6 +63,24 @@ def listings():
         return (json.dumps(games_schema.dump(all_games)))
 
 
+@listings_routes.route('/<string:username>', methods=["POST", "GET"])
+def getUserListings(username):
+    if request.method == "POST":
+        usersListing = Listing.query.filter_by(username=username).all()
+        return (json.dumps(games_schema.dump(usersListing)))
+
+
+@listings_routes.route('/<int:post_id>', methods=["DELETE"])
+def deleteUserListing(post_id):
+    if request.method == "DELETE":
+        body = request.get_json()
+        username = body["username"]
+        deletedListing = Listing.query.filter_by(id=post_id).delete()
+        updatedUserListings = Listing.query.filter_by(username=username).all()
+        db.session.commit()
+        return (json.dumps(games_schema.dump(updatedUserListings)))
+
+
 @listings_routes.route('/contact', methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -76,7 +94,7 @@ def contact():
         user = User.query.filter_by(username=seller_username).first()
         seller_email = user.email
         msg = Message("NEW MESSAGE! @ GamesGrotto",
-                      sender=["games.grotto.uk@gmail.com"], recipients=[seller_email])
+                      sender="games.grotto.uk@gmail.com", recipients=[seller_email])
         msg.html = render_template(
             'mail.html', username=seller_username, listing_title=listing_title, name=name, mobile_number=mobile_number, message=message)
         mail.send(msg)
