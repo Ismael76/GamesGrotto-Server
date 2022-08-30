@@ -1,4 +1,4 @@
-from asyncio.windows_events import NULL
+
 from ..database.db import db
 
 # create db model for posts
@@ -10,8 +10,8 @@ class Post(db.Model):
     text = db.Column(db.String(400), nullable=False)
     # date = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), nullable=False)
-    likes = db.Column(db.Integer, nullable=True)
-    dislikes = db.Column(db.Integer, nullable=True)
+    likes = db.Column(db.JSON, nullable=True)
+    dislikes = db.Column(db.JSON, nullable=True)
     
 
 

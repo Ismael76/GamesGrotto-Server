@@ -27,21 +27,37 @@ def posts():
         # date = body["date"]
         username = body["username"]
 
-        post = Post(title=title, text=text, username=username, likes=0, dislikes=0)
+        post = Post(title=title, text=text, username=username, likes=[], dislikes=[])
 
         db.session.add(post)
         db.session.commit()
         return body
     elif request.method == "PATCH":
         body = request.get_json()
+        username = body["username"]
+        option = body["option"]
         id = body["id"]
         likes = body["likes"]
         dislikes = body["dislikes"]
         post_to_patch = Post.query.filter_by(id=id).first()
+        if option == "likes":
+            if username in likes:
+                likes.remove(username)
+                number = -1
+            else:
+                likes.append(username)
+                number = 1
+        else:
+            if username in dislikes:
+                dislikes.remove(username)
+                number = -1
+            else:
+                dislikes.append(username)
+                number = 1
         post_to_patch.likes = likes
         post_to_patch.dislikes = dislikes
         db.session.commit()
-        return body
+        return str(number)
     else:
         all_posts = Post.query.all()
         return(json.dumps(posts_schema.dump(all_posts)))
