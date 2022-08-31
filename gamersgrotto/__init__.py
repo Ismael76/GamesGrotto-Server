@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
+import os
 from os import environ
 from flask import Flask
 from flask_cors import CORS
-
 
 from .database.db import db
 from .routes.main import main_routes
@@ -19,6 +19,9 @@ from .routes.scores import scores_routes
 load_dotenv()
 
 database_uri = environ.get('DATABASE_URL')
+
+if 'postgres:' in database_uri:
+    database_uri = database_uri.replace("postgres:", "postgresql:")
 
 # Set up the app
 
