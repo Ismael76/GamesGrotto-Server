@@ -5,18 +5,30 @@ from ..database.db import db
 from ..models.comments import Comment
 from flask_marshmallow import Marshmallow
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
 ma = Marshmallow(app)
 
+CORS(app)
+cors = CORS(app, resource={
+    r"/*": {
+        "origins": "*"
+    }
+})
+
 comments_routes = Blueprint('comments', __name__)
+
 
 class CommentsSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ("id", "text", "username", "post_id", "likes", "dislikes")
+
+
 comments_schema = CommentsSchema()
 comments_schema = CommentsSchema(many=True)
+
 
 @comments_routes.route('/', methods=["GET", "POST", "PATCH"])
 def comments():
@@ -27,7 +39,8 @@ def comments():
         username = body["username"]
         post_id = body["post_id"]
 
-        comment = Comment(text=text, username=username, post_id=post_id, likes=[], dislikes=[])
+        comment = Comment(text=text, username=username,
+                          post_id=post_id, likes=[], dislikes=[])
 
         db.session.add(comment)
         db.session.commit()
@@ -60,9 +73,10 @@ def comments():
         return str(number)
     else:
         all_comments = Comment.query.all()
-        return(json.dumps(comments_schema.dump(all_comments)))
+        return (json.dumps(comments_schema.dump(all_comments)))
+
 
 @comments_routes.route('/<int:post_id>', methods=["GET"])
 def comments_post(post_id):
     all_comments = Comment.query.filter_by(post_id=post_id).all()
-    return(json.dumps(comments_schema.dump(all_comments)))
+    return (json.dumps(comments_schema.dump(all_comments)))

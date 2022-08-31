@@ -4,19 +4,31 @@ from functools import wraps
 from ..database.db import db
 from ..models.posts import Post
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
 ma = Marshmallow(app)
 
+CORS(app)
+cors = CORS(app, resource={
+    r"/*": {
+        "origins": "*"
+    }
+})
+
 posts_routes = Blueprint('posts', __name__)
+
 
 class PostsSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ("id", "title", "text", "username", "likes", "dislikes")
+
+
 posts_schema = PostsSchema()
 posts_schema = PostsSchema(many=True)
+
 
 @posts_routes.route('/posts', methods=["GET", "POST", "PATCH"])
 def posts():
@@ -27,7 +39,8 @@ def posts():
         # date = body["date"]
         username = body["username"]
 
-        post = Post(title=title, text=text, username=username, likes=[], dislikes=[])
+        post = Post(title=title, text=text,
+                    username=username, likes=[], dislikes=[])
 
         db.session.add(post)
         db.session.commit()
@@ -60,5 +73,4 @@ def posts():
         return str(number)
     else:
         all_posts = Post.query.all()
-        return(json.dumps(posts_schema.dump(all_posts)))
-
+        return (json.dumps(posts_schema.dump(all_posts)))
