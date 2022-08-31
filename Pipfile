@@ -30,6 +30,7 @@ werkzeug = "==2.2.1"
 python-jwt = "*"
 flask-marshmallow = "*"
 flask-mail = "==0.9.0"
+marshmallow-sqlalchemy = "*"
 
 [requires]
 python_version = "3.10"
