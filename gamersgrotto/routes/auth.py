@@ -51,7 +51,7 @@ def login():
     Receives a username and password in the request body and generates a token
     that can be used to verify a user"s identity.
     """
-    print("RUNNING 1")
+
     body = request.get_json()
     username = body["username"]
     password = body["password"]
@@ -60,9 +60,9 @@ def login():
 
     if not user:
         return make_response("No such user.", 401)  # unauthorized
-    print("RUNNING 2")
+
     if check_password_hash(user.password, password):
-        print("RUNNING 3")
+
         # generate token with encoded user data
 
         token = jwt.encode({
@@ -78,7 +78,6 @@ def login():
 
 @auth_routes.route("/register", methods=["POST"])
 def register():
-    print("in here")
 
     # Should receive a username and password in the request body and generate a token that can be used to verify a user's identity.
 
@@ -86,10 +85,6 @@ def register():
     username = body["username"]
     email = body["email"]
     password = body["password"]
-
-    print("username:", username)
-    print("email:", email)
-    print("password:", password)
 
     # checks for existing user with the same username
     user = User.query.filter_by(username=username).first()
