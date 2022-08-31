@@ -23,6 +23,7 @@ comments_routes = Blueprint('comments', __name__)
 class CommentsSchema(ma.Schema):
     class Meta:
         # Fields to expose
+        #
         fields = ("id", "text", "username", "post_id", "likes", "dislikes")
 
 
