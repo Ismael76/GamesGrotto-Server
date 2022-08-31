@@ -3,7 +3,6 @@ from os import environ
 from flask import Flask
 from flask_cors import CORS
 
-
 from .database.db import db
 from .routes.main import main_routes
 # route for auth
