@@ -79,5 +79,5 @@ def comments():
 
 @comments_routes.route('/<int:post_id>', methods=["GET"])
 def comments_post(post_id):
-    all_comments = Comment.query.filter_by(post_id=post_id).all()
+    all_comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.id.desc()).all()
     return (json.dumps(comments_schema.dump(all_comments)))

@@ -72,5 +72,5 @@ def posts():
         db.session.commit()
         return str(number)
     else:
-        all_posts = Post.query.all()
+        all_posts = Post.query.order_by(Post.id.desc()).all()
         return (json.dumps(posts_schema.dump(all_posts)))
