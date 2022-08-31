@@ -37,4 +37,4 @@ python_version = "3.10"
 [scripts]
 init_db = "python init_db.py"
 dev = "flask run -p ${PORT}"
-start = "gunicorn gamers-grotto:app"
+start = "gunicorn gamersgrotto:app"
