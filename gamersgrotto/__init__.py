@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+import os
 from os import environ
 from flask import Flask
 from flask_cors import CORS
