@@ -41,5 +41,5 @@ def scores():
         db.session.commit()
         return body
     else:
-        all_scores = Score.query.all()
+        all_scores = Score.query.order_by(Score.score.desc()).all()
         return(json.dumps(scores_schema.dump(all_scores)))
