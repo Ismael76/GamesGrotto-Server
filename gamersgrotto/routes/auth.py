@@ -6,10 +6,17 @@ from ..database.db import db
 from ..models.users import User
 import jwt
 import os
-
+from flask_cors import CORS
 
 auth_routes = Blueprint('auth', __name__)
 app = Flask(__name__)
+
+CORS(app)
+cors = CORS(app, resource={
+    r"/*": {
+        "origins": "*"
+    }
+})
 
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 

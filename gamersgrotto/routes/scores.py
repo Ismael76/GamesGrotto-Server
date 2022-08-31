@@ -4,19 +4,31 @@ from functools import wraps
 from ..database.db import db
 from ..models.scores import Score
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
 ma = Marshmallow(app)
 
+CORS(app)
+cors = CORS(app, resource={
+    r"/*": {
+        "origins": "*"
+    }
+})
+
 scores_routes = Blueprint('scores', __name__)
+
 
 class ScoresSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ("id", "username", "score")
+
+
 scores_schema = ScoresSchema()
 scores_schema = ScoresSchema(many=True)
+
 
 @scores_routes.route('/', methods=["GET", "PATCH", "POST"])
 def scores():
@@ -41,5 +53,6 @@ def scores():
         db.session.commit()
         return body
     else:
-        all_scores = Score.query.all()
+        all_scores = Score.query.order_by(Score.score.desc()).all()
         return(json.dumps(scores_schema.dump(all_scores)))
+
