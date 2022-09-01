@@ -18,7 +18,7 @@ ma = Marshmallow(app)
 class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ("id", "username")
+        fields = ("id", "username", "email")
 
 
 users_schema = UserSchema()
