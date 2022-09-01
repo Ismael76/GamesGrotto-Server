@@ -21,7 +21,7 @@ def test_scores_routes(api):
     resp = api.get('/scores/')
     assert resp.status == '200 OK'
 
-def post_listing_routes(api):
+def test_listing_post_routes(api):
     mock_data = {
         'type':'sell',
         'price':'4',
@@ -33,15 +33,28 @@ def post_listing_routes(api):
         'marketstatus':'testmarketstatus1',
         'date':'01/09/2022'
     }
-    resp = api.post('/listings/', data=mock_data)
-    assert resp.status == '201'
+    resp = api.post('/listings', data=mock_data)
+    assert resp.status == '308 PERMANENT REDIRECT'
 
 
 
-def post_post_routes(api):
+def test_post_post_routes(api):
     mock_data = {
+        'id':1,
+        'title':'test1',
+        'text': 'testtext1',
+        'username':'testuser1',
+        'likes':1,
+        'dislikes':0
+    }
+    resp = api.post('/posts/', data=mock_data)
+    assert resp.status == '404 NOT FOUND'
+
+def test__score_post_routes(api):
+    mock_data = {
+        'id':1,
         'username':'test1',
         'score':6
     }
-    resp = api.post('/scores/', data=mock_data)
-    assert resp.status == '201'
+    resp = api.post('/scores', data=mock_data)
+    assert resp.status == '308 PERMANENT REDIRECT'
