@@ -16,6 +16,15 @@ class Listing(db.Model):
     # tradestatus = db.Column(db.String(100), nullable=True)
     date = db.Column(db.Date, nullable=False)
 
+    def __init__(self, title, description, image, username, marketstatus, date):
+        self.title = title
+        self.description = description
+        self.image = image
+        self.username = username
+        self.marketstatus = marketstatus
+        self.date = date
+
+
 
     # additional tags for type of game and whether it is for sale or trade etc.
     # tag = db.Column(db.String(100), nullable=True)

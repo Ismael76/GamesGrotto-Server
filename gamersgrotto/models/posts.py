@@ -13,5 +13,11 @@ class Post(db.Model):
     likes = db.Column(db.JSON, nullable=True)
     dislikes = db.Column(db.JSON, nullable=True)
     
+    def __init__(self, title, text, username, likes, dislikes):
+        self.title = title
+        self.text = text
+        self.username = username
+        self.likes = likes
+        self.dislikes = dislikes
 
 

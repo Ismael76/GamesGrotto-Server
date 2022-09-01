@@ -12,4 +12,10 @@ class Comment(db.Model):
     likes = db.Column(db.JSON, nullable=True)
     dislikes = db.Column(db.JSON, nullable=True)
 
+    def __init__(self, text, username, post_id, likes, dislikes):
+        self.text = text
+        self.username = username
+        self.post_id = post_id
+        self.likes = likes
+        self.dislikes = dislikes
 
