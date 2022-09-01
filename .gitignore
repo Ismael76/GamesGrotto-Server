@@ -4,3 +4,4 @@ __pycache__
 **.db
 .coverage
 .csv
+.pytest_cache

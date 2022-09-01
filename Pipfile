@@ -38,4 +38,10 @@ python_version = "3.10"
 [scripts]
 init_db = "python init_db.py"
 dev = "flask run -p ${PORT}"
+test = "pytest ."
 start = "gunicorn gamersgrotto:app"
+coverage = "pytest --cov-report term-missing --cov=."
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
