@@ -74,6 +74,6 @@ GamesGrotto is a site inspised by our love for games, all things local and the e
 - Building a reactjs python-flask web-app within a HTML canvas
 
 <br>
-</hr>
+<hr/>
 <br>
 **Thankyou for reading**
