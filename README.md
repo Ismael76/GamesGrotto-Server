@@ -19,16 +19,17 @@ Server: ```https://github.com/Ismael76/GamesGrotto-Server```
     <br>
 ## Getting started
 
-1. Clone this repository:
+1. Clone this repository: <br>
     ```https://github.com/Ismael76/GamesGrotto-Server```
 
-2. CD into GamesGrotto-Server, run shell and install dependencies:
+2. CD into GamesGrotto-Server, run shell and install dependencies: <br>
     ```pipshell install```
     ```pipenv install```
 
-3. Database migration/initialisation... (todo)
+3. Database initialisation: <br> 
+    ```python init_db.py```
 
-4. Run the server:
+4. Run the server: <br> 
     ```pipenv run dev```
 
    <br>
