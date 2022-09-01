@@ -61,6 +61,7 @@ GamesGrotto is a site inspised by our love for games, all things local and the e
 # Bugs
 - Known bug: when user exits game if they press up whilst the popup appears they automatically walk up on game exit
 - Select dropdown UI issues
+- Heroku removing free PGsql DB usage from NOV 2022
 
 # Wins and Challenges
 ### Wins
