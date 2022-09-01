@@ -4,12 +4,25 @@ from datetime import datetime, timedelta
 from functools import wraps
 from ..database.db import db
 from ..models.users import User
+from flask_marshmallow import Marshmallow
 import jwt
 import os
 from flask_cors import CORS
+import json
 
 auth_routes = Blueprint('auth', __name__)
 app = Flask(__name__)
+ma = Marshmallow(app)
+
+
+class UserSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ("id", "username")
+
+
+users_schema = UserSchema()
+users_schema = UserSchema(many=True)
 
 CORS(app)
 cors = CORS(app, resource={
@@ -132,6 +145,12 @@ def update_and_get_user(current_user):
         # "full_name": user.full_name,
         "email": user.email
     }), 200)
+
+
+@auth_routes.route("/users", methods=["GET"])
+def get_all_users():
+    users = User.query.all()
+    return json.dumps(users_schema.dump(users))
 
 
 if __name__ == "__main__":
