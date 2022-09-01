@@ -60,7 +60,7 @@ def listings():
         db.session.commit()
         return body
     else:
-        all_games = Listing.query.all()
+        all_games = Listing.query.order_by(Listing.id.desc()).all()
         return (json.dumps(games_schema.dump(all_games)))
 
 
