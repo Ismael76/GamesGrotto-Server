@@ -77,4 +77,5 @@ GamesGrotto is a site inspised by our love for games, all things local and the e
 <hr/>
 <br>
 
-__Thankyou for reading,__ _Dev team_
+__Thankyou for reading,__ <br>
+_Dev team_
