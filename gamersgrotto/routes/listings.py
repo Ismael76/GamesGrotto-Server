@@ -91,9 +91,14 @@ def contact():
         name = body["name"]
         mobile_number = body["mobile_number"]
         message = body["message"]
+        sender_username = body["sender_username"]
 
-        user = User.query.filter_by(username=seller_username).first()
-        seller_email = user.email
+        seller_user = User.query.filter_by(username=seller_username).first()
+        seller_email = seller_user.email
+
+        sender_user = User.query.filter_by(username=sender_username).first()
+        sender_email = sender_user.email
+
         print(message)
         print(seller_email)
         msg = Message("NEW MESSAGE! @ GamesGrotto",
@@ -101,6 +106,6 @@ def contact():
         print(msg)
         u'\u2013'.encode('utf-8')
         msg.html = render_template(
-            'mail.html', username=seller_username, listing_title=listing_title, name=name, mobile_number=mobile_number, message=message)
+            'mail.html', username=seller_username, listing_title=listing_title, name=name, mobile_number=mobile_number, message=message, sender_email=sender_email)
         mail.send(msg)
         return {"sent": True}
