@@ -19,16 +19,13 @@ cors = CORS(app, resource={
 
 scores_routes = Blueprint('scores', __name__)
 
-
 class ScoresSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ("id", "username", "score")
 
-
 scores_schema = ScoresSchema()
 scores_schema = ScoresSchema(many=True)
-
 
 @scores_routes.route('/', methods=["GET", "PATCH", "POST"])
 def scores():
@@ -54,5 +51,4 @@ def scores():
         return body
     else:
         all_scores = Score.query.order_by(Score.score.desc()).all()
-        return(json.dumps(scores_schema.dump(all_scores)))
-
+        return (json.dumps(scores_schema.dump(all_scores)))
