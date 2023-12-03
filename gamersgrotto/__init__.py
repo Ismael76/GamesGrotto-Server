@@ -33,7 +33,7 @@ app.config.update(
 )
 
 CORS(app)
-cors = CORS(app, resource={
+cors = CORS(app, resources={
     r"/*": {
         "origins": "*"
     }
