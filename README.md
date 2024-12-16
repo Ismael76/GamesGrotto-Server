@@ -23,7 +23,6 @@ GamesGrotto is a site inspised by our love for games, all things local and the e
     ```https://github.com/Ismael76/GamesGrotto-Server```
 
 2. CD into GamesGrotto-Server, run shell and install dependencies: <br>
-    ```pipshell install```
     ```pipenv install```
 
 3. Database initialisation: <br> 
